@@ -1,0 +1,40 @@
+-- STORED PROCEDURES WITH ONE OR TWO PARAMETRS
+
+SELECT * FROM Person.CountryRegion
+SELECT * FROM Person.StateProvince
+
+drop proc SelectSTATE;
+
+-- creating procedure with one vaiable
+
+CREATE PROCEDURE SelectSTATE @StateProvinceCode NVARCHAR(20)
+AS
+SELECT * FROM Person.StateProvince
+WHERE StateProvinceCode = @StateProvinceCode
+
+-- creating procedure with two variables
+drop proc SelectSTATE2;
+
+CREATE PROCEDURE SelectSTATE2 @StateProvinceCode NVARCHAR(20), @CountryRegionCode NVARCHAR(20)
+AS
+SELECT * FROM Person.StateProvince
+WHERE StateProvinceCode = @StateProvinceCode AND CountryRegionCode = @CountryRegionCode
+GO
+
+
+
+EXEC SelectSTATE2 AZ, US;
+
+-- Rollups and Cube
+
+select * from CovidDeaths
+
+SELECT continent, location, sum(total_cases)
+FROM CovidDeaths
+GROUP BY CUBE (continent, location)
+ORDER BY continent,2 DESC
+
+SELECT * FROM HumanResources.EmployeeAddress
+
+
+
